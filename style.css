@@ -1,0 +1,293 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e6f5ff, #c8e6fa, #dceeff);
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #527b9e;
+}
+
+/* CONTAINER */
+.container {
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 15px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #709bbd;
+}
+
+/* AMPLOP */
+.envelope {
+    width: 290px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #91c5e8;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #a8d5f2;
+    clip-path: polygon(
+        0 0,
+        50% 55%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+    z-index: 3;
+    border-radius: 8px;
+}
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+    background: #bddff6;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 65%
+    );
+    transform-origin: top;
+    transition: transform .7s ease;
+    z-index: 4;
+}
+
+/* KARTU UCAPAN */
+.letter {
+    position: absolute;
+    width: 260px;
+    min-height: 370px;
+    background: #ffffff;
+    border-radius: 12px;
+    left: 15px;
+    bottom: 5px;
+    padding: 20px 16px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .8s ease;
+    box-shadow: 0 8px 30px #669bc533;
+}
+
+/* FOTO */
+.photo-frame {
+    width: 125px;
+    height: 125px;
+    margin: 0 auto 12px;
+    padding: 6px;
+    background: #d7edff;
+    border-radius: 50%;
+    border: 2px dashed #8dbde0;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* TULISAN */
+.small-text {
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    color: #91b9d8;
+}
+
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #649bc4;
+    font-size: 29px;
+    margin: 5px 0;
+}
+
+.decoration {
+    font-size: 13px;
+    color: #a5cce9;
+    margin: 10px 0;
+}
+
+.message {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #7798b3;
+}
+
+.love {
+    font-size: 12px;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #83b4d9;
+}
+
+/* BUTTON */
+button {
+    border: none;
+    background: #80b6df;
+    color: white;
+    padding: 13px 27px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px #83b9df55;
+    transition: .3s;
+}
+
+button:hover {
+    transform: translateY(-4px);
+    background: #649fcf;
+}
+
+.hint {
+    font-size: 11px;
+    margin-top: 17px;
+    color: #709bbd;
+    letter-spacing: 1px;
+}
+
+#replayBtn {
+    display: none;
+}
+
+/* AMPLOP TERBUKA */
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+/* KARTU TEPAT DI TENGAH LAYAR */
+.envelope.open .letter {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+
+    width: min(320px, calc(100vw - 35px));
+    max-height: 85vh;
+
+    overflow-y: auto;
+    opacity: 1;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 50;
+    padding: 20px 16px;
+    margin: 0;
+}
+
+/* DEKORASI */
+.background span {
+    position: fixed;
+    color: #ffffff;
+    opacity: .7;
+    font-size: 25px;
+    animation: float 5s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.background span:nth-child(1) {
+    top: 10%;
+    left: 15%;
+}
+
+.background span:nth-child(2) {
+    top: 25%;
+    right: 15%;
+}
+
+.background span:nth-child(3) {
+    bottom: 15%;
+    left: 20%;
+}
+
+.background span:nth-child(4) {
+    bottom: 20%;
+    right: 20%;
+}
+
+.background span:nth-child(5) {
+    top: 60%;
+    left: 8%;
+}
+
+.background span:nth-child(6) {
+    top: 75%;
+    right: 8%;
+}
+
+/* ANIMASI */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(20deg);
+    }
+}
+
+/* TAMPILAN HP */
+@media (max-width: 400px) {
+    .envelope {
+        transform: scale(.9);
+    }
+
+    .envelope.open .letter {
+        width: calc(100vw - 30px);
+        max-height: 85vh;
+    }
+}
+
+/* LAYAR PENDEK */
+@media (max-height: 650px) {
+    .container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .top-label {
+        margin-bottom: 20px;
+    }
+
+    .envelope.open .letter {
+        max-height: 82vh;
+    }
+}
